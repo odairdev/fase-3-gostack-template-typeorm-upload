@@ -29,7 +29,6 @@ class Transaction {
   @JoinColumn({name: 'category_id'})
   category: string
 
-  @OneToMany(() => Transaction, transaction => transaction.category)
   category_id: string;
 
   created_at: Date;
