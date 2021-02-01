@@ -2,17 +2,17 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
-  JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
-} from 'typeorm'
-import Category from './Category';
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+
+import Category from "./Category";
 
 @Entity('transactions')
 class Transaction {
-
+  
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,17 +22,20 @@ class Transaction {
   @Column()
   type: 'income' | 'outcome';
 
-  @Column()
+  @Column('decimal')
   value: number;
 
-  @ManyToOne(() => Category, category => category.transaction, {eager: true})
-  @JoinColumn({name: 'category_id'})
-  category: string
+  @ManyToOne(() => Category, category => category.transaction, { eager: true })
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 
+  @Column()
   category_id: string;
 
+  @CreateDateColumn()
   created_at: Date;
 
+  @UpdateDateColumn()
   updated_at: Date;
 }
 
